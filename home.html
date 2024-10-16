@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEZ</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>TEZ</h1>
+            <div id="userInfo">
+                <span id="username"></span>
+                <button id="logoutButton">Çıkış Yap</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="newPost">
+            <h2>Yeni Gönderi</h2>
+            <form id="postForm">
+                <textarea id="postContent" placeholder="Ne düşünüyorsun?" required></textarea>
+                <button type="submit">Paylaş</button>
+            </form>
+        </section>
+
+        <section id="posts">
+            <h2>Gönderiler</h2>
+            <div id="postsContainer"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 TEZ. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script src="/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol - SocialApp</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Kayıt Ol</h2>
+        <form id="registerForm">
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="username" required>
+
+            <label for="email">E-posta:</label>
+            <input type="email" id="email" required>
+
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" required>
+
+            <button type="submit">Kayıt Ol</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registerForm');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            console.log('Form submit olayı tetiklendi');
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const username = document.getElementById('username').value;
+
+            resultDiv.textContent = 'İstek gönderiliyor...';
+            console.log('İstek gönderiliyor:', { email, password, username });
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password, username })
+                });
+
+                console.log('Sunucu yanıtı alındı:', response);
+
+                const data = await response.json();
+                console.log('Sunucu yanıt verisi:', data);
+
+                if (response.ok) {
+                    resultDiv.textContent = `Başarılı: ${data.message}`;
+                    resultDiv.style.color = 'green';
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 2000);
+                } else {
+                    resultDiv.textContent = `Hata: ${data.message}`;
+                    resultDiv.style.color = 'red';
+                }
+            } catch (error) {
+                resultDiv.textContent = `Bağlantı hatası: ${error.message}`;
+                resultDiv.style.color = 'red';
+                console.error('Fetch hatası:', error);
+            }
+        });
+    </script>
+</body>
+</html>
