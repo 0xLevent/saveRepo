@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'denemekey'; // This should match the secret in your server.js
+const JWT_SECRET = 'KEY'; 
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
